@@ -9,5 +9,16 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <p>Disks list</p>
+  <ion-list>
+    <ion-item
+      *ngFor="let disk of disksList; let i = index"
+      (click)="onDisplayLendDisk(disk.id)">
+      <ion-icon slot="start" name="disc" [color]="!disk.isLent ? 'success' : 'danger'"></ion-icon>
+      <ion-label text-wrap>
+        <h2>{{ disk.title }}</h2>
+        <h6>{{ disk.artist }}</h6>
+        <p>{{ disk.songs.length }} songs</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
