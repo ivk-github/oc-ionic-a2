@@ -9,5 +9,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <p>Books list</p>
+  <ion-list>
+    <ion-item
+      *ngFor="let book of booksList; let i = index"
+      (click)="onDisplayLendBook(book.id)">
+      <ion-icon slot="start" name="book" [color]="!book.isLent ? 'success' : 'danger'"></ion-icon>
+      <ion-label text-wrap>
+        <h2>{{ book.title }}</h2>
+        <h6>{{ book.author }}</h6>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
