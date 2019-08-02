@@ -10,5 +10,5 @@ export class BookModel {
     this.author = author;
     this.description = description;
     this.isLent = false;
-  }  
+  }
 }
