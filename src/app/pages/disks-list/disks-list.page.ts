@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 
 import { DiskModel } from 'src/app/models/disk-model';
 
 import { MediasService } from 'src/app/services/medias.service';
+
+import { LendDiskPage } from '../lend-disk/lend-disk.page';
 
 @Component({
   selector: 'app-disks-list',
@@ -15,7 +18,10 @@ export class DisksListPage implements OnInit, OnDestroy {
   disksSubscription: Subscription;
   disksList: DiskModel[];
 
-  constructor(private mediasService: MediasService) { }
+  constructor(private modalController: ModalController,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private mediasService: MediasService) { }
 
   ngOnInit() {
     this.disksSubscription = this.mediasService.disksList$.subscribe(
@@ -31,6 +37,12 @@ export class DisksListPage implements OnInit, OnDestroy {
   }
 
   async onDisplayLendDisk(diskId: number) {
-    console.log("onDisplayLendDisk - diskId : " + diskId);
+    const modal = await this.modalController.create({
+      component: LendDiskPage,
+      componentProps: {
+        'diskId': diskId
+      }
+    });
+    return await modal.present();
   }
 }

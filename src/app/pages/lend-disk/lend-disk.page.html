@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lend-disk</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="onDismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap>
+      {{ disk.title }}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{ disk.artist }}</ion-card-subtitle>
+      <ion-card-title>{{ disk.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Songs</h2>
+      <ion-list>
+        <ion-item *ngFor="let song of disk.songs; let i = index">
+          <ion-icon slot="start" name="musical-note"></ion-icon>
+          <ion-label>{{ song.index }}. {{ song.title }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="danger" [disabled]="disk.isLent" (click)="onLend()">Prêter</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="success" [disabled]="!disk.isLent" (click)="onLend()">Rendre</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
