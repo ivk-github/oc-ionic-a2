@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 
 import { BookModel } from 'src/app/models/book-model';
 
@@ -16,6 +16,8 @@ export class LendBookPage implements OnInit {
   book: BookModel;
 
   constructor(private modalController: ModalController,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
               private mediasService: MediasService) { }
 
   ngOnInit() {
@@ -28,10 +30,35 @@ export class LendBookPage implements OnInit {
     });
   }
 
-  onLend() {
-    /*
-    this.book.isLent = !this.book.isLent;
-    */
-    this.mediasService.isLentManager(this.book);
+  async onLend() {
+    /* Présentation du loader */
+    let loader = await this.loadingCtrl.create({
+      message: 'Sauvegarde en cours…'
+    });
+    loader.present();
+
+    this.mediasService.isLentManager(this.book).then(
+      async () => {
+        /* Désactivation du loader */
+        loader.dismiss();
+
+        /* Présentation du toast */
+        let toast = await this.toastCtrl.create({
+          message: 'Données sauvegardées !',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      },
+      async (error) => {
+        loader.dismiss();
+        let toast = await this.toastCtrl.create({
+          message: error,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
+    );
   }
 }

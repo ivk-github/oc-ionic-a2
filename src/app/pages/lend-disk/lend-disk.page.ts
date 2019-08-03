@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 
 import { DiskModel } from 'src/app/models/disk-model';
 
@@ -16,6 +16,8 @@ export class LendDiskPage implements OnInit {
   disk: DiskModel;
 
   constructor(private modalController: ModalController,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
               private mediasService: MediasService) { }
 
   ngOnInit() {
@@ -28,10 +30,35 @@ export class LendDiskPage implements OnInit {
     });
   }
 
-  onLend() {
-    /*
-    this.disk.isLent = !this.disk.isLent;
-    */
-    this.mediasService.isLentManager(this.disk);
+  async onLend() {
+    /* Présentation du loader */
+    let loader = await this.loadingCtrl.create({
+      message: 'Sauvegarde en cours…'
+    });
+    loader.present();
+
+    this.mediasService.isLentManager(this.disk).then(
+      async () => {
+        /* Désactivation du loader */
+        loader.dismiss();
+
+        /* Présentation du toast */
+        let toast = await this.toastCtrl.create({
+          message: 'Données sauvegardées !',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      },
+      async (error) => {
+        loader.dismiss();
+        let toast = await this.toastCtrl.create({
+          message: error,
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
+    );
   }
 }

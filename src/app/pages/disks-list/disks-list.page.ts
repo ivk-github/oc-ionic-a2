@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalController, LoadingController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { DiskModel } from 'src/app/models/disk-model';
 
@@ -19,8 +19,6 @@ export class DisksListPage implements OnInit, OnDestroy {
   disksList: DiskModel[];
 
   constructor(private modalController: ModalController,
-              private loadingCtrl: LoadingController,
-              private toastCtrl: ToastController,
               private mediasService: MediasService) { }
 
   ngOnInit() {

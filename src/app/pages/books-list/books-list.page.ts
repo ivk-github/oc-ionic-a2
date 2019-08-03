@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalController, LoadingController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { BookModel } from 'src/app/models/book-model';
 
@@ -19,8 +19,6 @@ export class BooksListPage implements OnInit, OnDestroy {
   booksList: BookModel[];
 
   constructor(private modalController: ModalController,
-              private loadingCtrl: LoadingController,
-              private toastCtrl: ToastController,
               private mediasService: MediasService) { }
 
   ngOnInit() {

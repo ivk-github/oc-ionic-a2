@@ -141,6 +141,13 @@ export class MediasService {
   }
 
   isLentManager(media: any) {
-    media.isLent = !media.isLent;
+    return new Promise((resolve, reject) => {
+      if (media) {
+        media.isLent = !media.isLent;
+        resolve();
+      } else {
+        reject("Error update media !");
+      }
+    });
   }
 }
