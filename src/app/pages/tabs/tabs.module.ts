@@ -8,13 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs.page';
 import { TabsRoutingModule } from './tabs-routing.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: TabsPage
-  }
-];
-
 @NgModule({
   imports: [
     CommonModule,

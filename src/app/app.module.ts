@@ -18,10 +18,11 @@ import { LendDiskPageModule } from './pages/lend-disk/lend-disk.module';
   entryComponents: [],
   imports: [
     BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     LendBookPageModule, /* Modal*/
     LendDiskPageModule, /* Modal*/
-    IonicModule.forRoot(),
-    AppRoutingModule],
+  ],
   providers: [
     StatusBar,
     SplashScreen,

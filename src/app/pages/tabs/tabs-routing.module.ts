@@ -19,10 +19,10 @@ const routes: Routes = [
           { path: '', loadChildren: '../disks-list/disks-list.module#DisksListPageModule' },
         ]
       },
-      { path: '', redirectTo: '/tabs/books', pathMatch: 'full' }
+      { path: '', redirectTo: 'books', pathMatch: 'full' }
     ]
   },
-  { path: '', redirectTo: '/tabs/books', pathMatch: 'full' }
+  { path: '', redirectTo: 'books', pathMatch: 'full' }
 ];
 
 @NgModule({
