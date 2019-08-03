@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
+      <ion-button *ngIf="!book.isLent" slot="icon-only" color="danger" (click)="onLend()">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="book.isLent" slot="icon-only" color="success" (click)="onLend()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
       <ion-button slot="icon-only" (click)="onDismissModal()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
@@ -22,6 +28,7 @@
     </ion-card-content>
   </ion-card>
 
+  <!--
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -32,4 +39,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  -->
 </ion-content>
