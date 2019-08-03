@@ -37,7 +37,6 @@ export class BooksListPage implements OnInit, OnDestroy {
   }
 
   async onDisplayLendBook(bookId: number) {
-    console.log("onDisplayLendBook - bookId : " + bookId);
     const modal = await this.modalController.create({
       component: LendBookPage,
       componentProps: {
