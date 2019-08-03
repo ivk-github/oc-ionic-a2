@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
+import { BookModel } from 'src/app/models/book-model';
+
+import { MediasService } from 'src/app/services/medias.service';
 
 @Component({
   selector: 'app-lend-book',
@@ -7,9 +12,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LendBookPage implements OnInit {
 
-  constructor() { }
+  @Input() bookId: number;
+  book: BookModel;
+
+  constructor(private modalController: ModalController,
+              private mediasService: MediasService) { }
 
   ngOnInit() {
+    this.book = this.mediasService.booksList.find(book => book.id === this.bookId);
   }
 
+  onDismissModal() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
+  onLend() {
+    this.book.isLent = !this.book.isLent;
+  }
 }

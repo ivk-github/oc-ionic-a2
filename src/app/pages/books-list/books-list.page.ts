@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 
 import { BookModel } from 'src/app/models/book-model';
 
 import { MediasService } from 'src/app/services/medias.service';
+
+import { LendBookPage } from '../lend-book/lend-book.page';
 
 @Component({
   selector: 'app-books-list',
@@ -15,7 +18,10 @@ export class BooksListPage implements OnInit, OnDestroy {
   booksSubscription: Subscription;
   booksList: BookModel[];
 
-  constructor(private mediasService: MediasService) { }
+  constructor(private modalController: ModalController,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private mediasService: MediasService) { }
 
   ngOnInit() {
     this.booksSubscription = this.mediasService.booksList$.subscribe(
@@ -32,5 +38,12 @@ export class BooksListPage implements OnInit, OnDestroy {
 
   async onDisplayLendBook(bookId: number) {
     console.log("onDisplayLendBook - bookId : " + bookId);
+    const modal = await this.modalController.create({
+      component: LendBookPage,
+      componentProps: {
+        'bookId': bookId
+      }
+    });
+    return await modal.present();
   }
 }

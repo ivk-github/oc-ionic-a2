@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lend-book</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="onDismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap>
+      {{ book.title }}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
+      <ion-card-title>{{ book.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        {{ book.description }}
+    </ion-card-content>
+  </ion-card>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="danger" [disabled]="book.isLent" (click)="onLend()">Prêter</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="success" [disabled]="!book.isLent" (click)="onLend()">Rendre</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
