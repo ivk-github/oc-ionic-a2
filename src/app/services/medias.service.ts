@@ -139,4 +139,8 @@ export class MediasService {
   emitDisks() {
     this.disksList$.next(this.disksList);
   }
+
+  isLentManager(media: any) {
+    media.isLent = !media.isLent;
+  }
 }

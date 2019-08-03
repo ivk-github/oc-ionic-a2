@@ -29,6 +29,9 @@ export class LendDiskPage implements OnInit {
   }
 
   onLend() {
+    /*
     this.disk.isLent = !this.disk.isLent;
+    */
+    this.mediasService.isLentManager(this.disk);
   }
 }

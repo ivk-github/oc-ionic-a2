@@ -29,6 +29,9 @@ export class LendBookPage implements OnInit {
   }
 
   onLend() {
+    /*
     this.book.isLent = !this.book.isLent;
+    */
+    this.mediasService.isLentManager(this.book);
   }
 }
