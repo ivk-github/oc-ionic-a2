@@ -16,49 +16,63 @@ export class MediasService {
       title: "Harry Potter à l'école des sorciers",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter à l'école des sorciers",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 2,
       title: "Harry Potter et la Chambre des secrets",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et la Chambre des secrets",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 3,
       title: "Harry Potter et le Prisonnier d'Azkaban",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et le Prisonnier d'Azkaban",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 4,
       title: "Harry Potter et la Coupe de feu",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et la Coupe de feu",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 5,
       title: "Harry Potter et l'Ordre du phénix",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et l'Ordre du phénix",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 6,
       title: "Harry Potter et le Prince de sang-mêlé",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et le Prince de sang-mêlé",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 7,
       title: "Harry Potter et les Reliques de la Mort",
       author: "J. K. Rowling",
       description: "Description du livre Harry Potter et les Reliques de la Mort",
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     }
   ];
 
@@ -84,7 +98,9 @@ export class MediasService {
         {index: 13, title: "There's a Place"},
         {index: 14, title: "Twist and Shout"}
       ],
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 2,
@@ -106,7 +122,9 @@ export class MediasService {
         {index: 13, title: "Yesterday"},
         {index: 14, title: "Dizzy Miss Lizzy"}
       ],
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     },
     {
       id: 3,
@@ -126,7 +144,9 @@ export class MediasService {
         {index: 11, title: "For You Blue"},
         {index: 12, title: "Get Back"}
       ],
-      isLent: false
+      isLent: false,
+      borrower: "",
+      lendDate: ""
     }
   ];
 
