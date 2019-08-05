@@ -18,6 +18,7 @@
         <h2>{{ disk.title }}</h2>
         <h6>{{ disk.artist }}</h6>
         <p>{{ disk.songs.length }} songs</p>
+        <p *ngIf="disk.isLent">Borrowed by {{ disk.borrower }} on {{ disk.lendDate | date: "dd/MM/yyyy H:mm" }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

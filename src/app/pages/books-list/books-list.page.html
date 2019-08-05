@@ -17,6 +17,7 @@
       <ion-label text-wrap>
         <h2>{{ book.title }}</h2>
         <h6>{{ book.author }}</h6>
+        <p *ngIf="book.isLent">Borrowed by {{ book.borrower }} on {{ book.lendDate | date: "dd/MM/yyyy H:mm" }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
