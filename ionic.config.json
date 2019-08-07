@@ -1,5 +1,7 @@
 {
   "name": "oc-ionic-a1",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

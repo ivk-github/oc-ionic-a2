@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 /* Modals */
 import { LendBookPageModule } from './pages/lend-book/lend-book.module';
 import { LendDiskPageModule } from './pages/lend-disk/lend-disk.module';
@@ -24,6 +26,7 @@ import { LendDiskPageModule } from './pages/lend-disk/lend-disk.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    IonicStorageModule.forRoot(),
     LendBookPageModule, /* Modal */
     LendDiskPageModule, /* Modal */
   ],
