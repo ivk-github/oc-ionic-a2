@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { Storage } from '@ionic/storage';
+
 import { BookModel } from '../models/book-model';
 import { DiskModel } from '../models/disk-model';
 
@@ -10,6 +12,8 @@ import { DiskModel } from '../models/disk-model';
 export class MediasService {
 
   booksList$ = new Subject<BookModel[]>();
+  booksList: BookModel[] = [];
+/*
   booksList: BookModel[] = [
     {
       id: 1,
@@ -75,8 +79,11 @@ export class MediasService {
       lendDate: ""
     }
   ];
+*/
 
   disksList$ = new Subject<DiskModel[]>();
+  disksList: DiskModel[] = [];
+/*
   disksList: DiskModel[] = [
     {
       id: 1,
@@ -149,8 +156,11 @@ export class MediasService {
       lendDate: ""
     }
   ];
+*/
 
-  constructor() { }
+  constructor(private storage: Storage) {
+    this.loadListsFromDevice();
+  }
 
   emitBooks() {
     this.booksList$.next(this.booksList);
@@ -166,10 +176,51 @@ export class MediasService {
         media.isLent = lend;
         media.borrower = borrower;
         media.lendDate = lendDate;
+        this.saveListsOnDevice();
         resolve();
       } else {
         reject("Error update media !");
       }
     });
+  }
+
+  saveListsOnDevice() {
+    this.saveBooksListOnDevice();
+    this.saveDisksListOnDevice();
+  }
+
+  saveBooksListOnDevice() {
+    this.storage.set('books', this.booksList);
+  }
+
+  saveDisksListOnDevice() {
+    this.storage.set('disks', this.disksList);
+  }
+
+  loadListsFromDevice() {
+    this.loadBooksListFromDevice();
+    this.loadDisksListFromDevice();
+  }
+
+  loadBooksListFromDevice() {
+    this.storage.get('books').then(
+      (list) => {
+        if (list && list.length) {
+          this.booksList = list.slice();
+        }
+        this.emitBooks();
+      }
+    );
+  }
+
+  loadDisksListFromDevice() {
+    this.storage.get('disks').then(
+      (list) => {
+        if (list && list.length) {
+          this.disksList = list.slice();
+        }
+        this.emitDisks();
+      }
+    );
   }
 }
