@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
+      <!--
       <ion-button *ngIf="!book.isLent" slot="icon-only" color="danger" (click)="onLend()">
         <ion-icon name="arrow-round-forward"></ion-icon>
       </ion-button>
       <ion-button *ngIf="book.isLent" slot="icon-only" color="success" (click)="onLend()">
         <ion-icon name="arrow-round-back"></ion-icon>
       </ion-button>
+      -->
       <ion-button slot="icon-only" (click)="onDismissModal()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
@@ -22,11 +24,40 @@
     <ion-card-header>
       <ion-card-subtitle>{{ book.author }}</ion-card-subtitle>
       <ion-card-title>{{ book.title }}</ion-card-title>
+      <ion-card-subtitle *ngIf="book.isLent">Borrowed by {{ book.borrower }} on {{ book.lendDate | date: "dd/MM/yyyy H:mm" }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
         {{ book.description }}
     </ion-card-content>
   </ion-card>
+
+  <form [formGroup]="lendForm" *ngIf="!book.isLent">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Borrower</ion-label>
+        <ion-input formControlName="borrower"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Lend date</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" pickerFormat="DD/MM/YYYY HH:mm" formControlName="lendDate"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" [disabled]="lendForm.invalid" expand="full" color="danger" (click)="onLend(true)">
+      <ion-icon slot="start" name="arrow-round-forward"></ion-icon>
+      Lend
+    </ion-button>
+  </form>
+
+  <ion-grid *ngIf="book.isLent">
+    <ion-row>
+      <ion-col>
+        <ion-button type="button" expand="full" color="success" (click)="onLend(false)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Return
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <!--
   <ion-grid>

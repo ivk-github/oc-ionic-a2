@@ -160,10 +160,12 @@ export class MediasService {
     this.disksList$.next(this.disksList);
   }
 
-  isLentManager(media: any) {
+  isLentManager(media: any, lend: boolean, borrower: string, lendDate: string) {
     return new Promise((resolve, reject) => {
       if (media) {
-        media.isLent = !media.isLent;
+        media.isLent = lend;
+        media.borrower = borrower;
+        media.lendDate = lendDate;
         resolve();
       } else {
         reject("Error update media !");

@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 /* Modals */
 import { LendBookPageModule } from './pages/lend-book/lend-book.module';
 import { LendDiskPageModule } from './pages/lend-disk/lend-disk.module';
@@ -20,8 +22,10 @@ import { LendDiskPageModule } from './pages/lend-disk/lend-disk.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    LendBookPageModule, /* Modal*/
-    LendDiskPageModule, /* Modal*/
+    FormsModule,
+    ReactiveFormsModule,
+    LendBookPageModule, /* Modal */
+    LendDiskPageModule, /* Modal */
   ],
   providers: [
     StatusBar,
