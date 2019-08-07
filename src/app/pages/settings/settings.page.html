@@ -9,5 +9,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <p>Settings</p>
+  <ion-list>
+    <ion-item (click)="onLoadListsFromBackEnd()">
+      <ion-icon slot="start" name="cloud-download"></ion-icon>
+      <ion-label>Load data from backend</ion-label>
+    </ion-item>
+    <ion-item (click)="onSaveListsOnBackEnd()">
+      <ion-icon slot="start" name="cloud-upload"></ion-icon>
+      <ion-label>Save data on backend</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

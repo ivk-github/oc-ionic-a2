@@ -3,6 +3,9 @@ import { Subject } from 'rxjs';
 
 import { Storage } from '@ionic/storage';
 
+import * as firebase from 'firebase';
+import DataSnapshot = firebase.database.DataSnapshot;
+
 import { BookModel } from '../models/book-model';
 import { DiskModel } from '../models/disk-model';
 
@@ -222,5 +225,50 @@ export class MediasService {
         this.emitDisks();
       }
     );
+  }
+
+  loadListsFromBackEnd() {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('books').once('value').then(
+        (data: DataSnapshot) => {
+          this.booksList = data.val();
+          this.emitBooks();
+
+          firebase.database().ref('disks').once('value').then(
+            (data: DataSnapshot) => {
+              this.disksList = data.val();
+              this.emitDisks();
+              resolve("Données récupérées avec succès !");
+            },
+            (error) => {
+              reject(error);
+            }
+          );
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  saveListsOnBackEnd() {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('books').set(this.booksList).then(
+        (data: DataSnapshot) => {
+          firebase.database().ref('disks').set(this.disksList).then(
+            (data: DataSnapshot) => {
+              resolve("Données sauvegardées avec succès !");
+            },
+            (error) => {
+              reject(error);
+            }
+          );
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 }
