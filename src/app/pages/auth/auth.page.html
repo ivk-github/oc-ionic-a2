@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="mode === 'signup'">Sign up</ion-title>
+    <ion-title *ngIf="mode === 'signin'">Sign in</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="authForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Adresse mail</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <span>
+      <ion-text color="danger">{{ errorMessage }}</ion-text>
+    </span>
+    <ion-button *ngIf="mode === 'signup'" [disabled]="authForm.invalid" expand="full" (click)="onSubmitForm()">
+      <ion-icon slot="start" name="person-add"></ion-icon>
+      Sign up
+    </ion-button>
+    <ion-button *ngIf="mode === 'signin'" [disabled]="authForm.invalid" expand="full" (click)="onSubmitForm()">
+      <ion-icon slot="start" name="person"></ion-icon>
+      Sign in
+    </ion-button>
+  </form>    
+</ion-content>
